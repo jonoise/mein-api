@@ -9,6 +9,7 @@ urlpatterns = [
     path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('users/', include('apps.users.urls'), name='users'),
     path('users/email-validation/',
-         include('apps.email_validation.urls'), name="email_validation")
+         include('apps.email_validation.urls'), name="email_validation"),
+    path('restaurants/', include("apps.restaurants.urls"), name='restaurants'),
 
 ]

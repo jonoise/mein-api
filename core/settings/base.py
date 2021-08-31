@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     # MY APPS
     'apps.users.apps.UsersConfig',
     'apps.email_validation.apps.EmailValidationConfig',
+    'apps.restaurants.apps.RestaurantsConfig',
     # DJANGO
     'django.contrib.admin',
     'django.contrib.auth',
