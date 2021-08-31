@@ -13,5 +13,6 @@ urlpatterns = [
     path('restaurants/', include("apps.restaurants.urls"), name='restaurants'),
     path('menus/', include("apps.menus.urls"), name='menus'),
     path('dishes/', include("apps.dishes.urls"), name='dishes'),
+    path('tables/', include("apps.tables.urls"), name='tables'),
 
 ]

@@ -1,5 +1,5 @@
-from apps.restaurants.views import ListCreateRestaurants, RetrieveUpdateDestroyRestaurants
 from django.urls import path
+from .views import ListCreateRestaurants, RetrieveUpdateDestroyRestaurants
 
 urlpatterns = [
     path('', ListCreateRestaurants.as_view(), name="list-create-restaurant"),
