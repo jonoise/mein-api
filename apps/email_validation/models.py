@@ -17,7 +17,7 @@ class Email_Validation(models.Model):
         return f'Email Validator for {self.account.email}'
 
     def validate_uuid(self):
-        limit_date = self.instance.last_updated + dt.timedelta(days=2)
+        limit_date = self.last_updated + dt.timedelta(days=2)
         if dt.date.today() < limit_date:
             return True
         return False
