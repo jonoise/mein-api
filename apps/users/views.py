@@ -36,26 +36,11 @@ class MainUserView(generics.CreateAPIView):
             return response.Response({"message": "already_exists"}, status.HTTP_406_NOT_ACCEPTABLE)
 
 
-class WaiterView(generics.CreateAPIView):
-    queryset = MainUser.objects.all()
-    serializer_class = MainUserSerializer
-
-    def post(self, request):
-        credentials = request.data
-        try:
-            new_waiter = MainUser.objects.create_user(
-                email=credentials['email'], password=credentials['password'])
-
-            waiter_account = Account(
-                user=new_waiter, name="Mesero", is_waiter=True, email=new_waiter.email)
-            waiter_account.save()
-
-            return response.Response({"message": "created"}, status.HTTP_201_CREATED)
-        except IntegrityError:
-            return response.Response({"message": "already_exists"}, status.HTTP_406_NOT_ACCEPTABLE)
-
-
 class MainUserLogin(generics.CreateAPIView):
+    """
+    Este request se hace con email & password. Si las credenciales son correctas, se retorna el account y los tokens.
+    Sino, {'message': 'invalid_credentials'}, HTTP_401_UNAUTHORIZED
+    """
 
     serializer_class = MainUserSerializer
 
@@ -85,3 +70,28 @@ class MainUserChangePassword(generics.CreateAPIView):
             user.save()
             return response.Response({"message": "password_changed"}, status.HTTP_200_OK)
         return response.Response({"message": 'invalid_credentials'}, status.HTTP_406_NOT_ACCEPTABLE)
+
+
+class WaiterView(generics.CreateAPIView):
+    """
+    Este request se hace con email & password. Email Fake y password elegido por el dueño. Son las cuentas de los meseros. Regresa HTTP_200
+    Sino, {"message": "already_exists"}, HTTP_406_NOT_ACCEPTABLE
+    """
+
+    queryset = MainUser.objects.all()
+    serializer_class = MainUserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request):
+        credentials = request.data
+        try:
+            new_waiter = MainUser.objects.create_user(
+                email=credentials['email'], password=credentials['password'])
+
+            waiter_account = Account(
+                user=new_waiter, name="Mesero", is_waiter=True, email=new_waiter.email)
+            waiter_account.save()
+
+            return response.Response({"message": "created"}, status.HTTP_201_CREATED)
+        except IntegrityError:
+            return response.Response({"message": "already_exists"}, status.HTTP_406_NOT_ACCEPTABLE)

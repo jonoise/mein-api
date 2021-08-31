@@ -83,6 +83,7 @@ class Account(models.Model):
     uuid = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(max_length=100, blank=True)
+    image = models.ImageField()
 
     # AUTOMATIC
     created = models.DateTimeField(auto_now_add=True)
