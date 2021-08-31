@@ -1,4 +1,6 @@
+from posixpath import join
 import uuid
+import os
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
@@ -72,6 +74,18 @@ class MainUser(AbstractBaseUser):
         }
 
 
+def account_image_url(instance, filename, **kwargs):
+    if instance.is_owner:
+        return os.path.join(
+            "owner-profile",
+            filename
+        )
+    return os.path.join(
+        "meseros-profile",
+        filename
+    )
+
+
 class Account(models.Model):
     ACTIVE_USER = get_user_model()
     user = models.OneToOneField(
@@ -83,7 +97,8 @@ class Account(models.Model):
     uuid = models.CharField(max_length=255, blank=True, null=True)
     name = models.CharField(max_length=100, blank=True, null=True)
     email = models.EmailField(max_length=100, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True,
+                              upload_to=account_image_url)
 
     # AUTOMATIC
     created = models.DateTimeField(auto_now_add=True)
