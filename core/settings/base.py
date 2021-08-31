@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'apps.menus.apps.MenusConfig',
     'apps.dishes.apps.DishesConfig',
     'apps.tables.apps.TablesConfig',
+    'apps.checks.apps.ChecksConfig',
     # DJANGO
     'django.contrib.admin',
     'django.contrib.auth',
