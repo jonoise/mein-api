@@ -20,6 +20,7 @@ class Restaurant(models.Model):
     type_of = models.CharField(max_length=20, null=True, blank=True)
     logo = models.ImageField(null=True, blank=True,
                              upload_to=restaurante_logo_path)
+    pricipal_menu = models.CharField(max_length=255, blank=True, null=True)
     max_tables = models.PositiveIntegerField(default=3)
 
     def __str__(self) -> str:
