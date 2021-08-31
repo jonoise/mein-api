@@ -8,12 +8,16 @@ from django.db.utils import IntegrityError
 
 
 class MainUserView(generics.CreateAPIView):
+    """
+    Este request se hace con email & password. Si las credenciales son correctas, se retorna el account y los tokens.
+    Sino, {"message": "already_exists"}, status.HTTP_406_NOT_ACCEPTABLE
+    """
+
     queryset = MainUser.objects.all()
     serializer_class = MainUserSerializer
 
     def post(self, request):
         credentials = request.data
-        print(credentials)
         try:
             new_owner = MainUser.objects.create_user(
                 email=credentials['email'],
@@ -32,6 +36,7 @@ class MainUserView(generics.CreateAPIView):
             serializer = AccountSerializer(owner_account)
 
             return response.Response({"user": serializer.data, 'tokens': new_owner.tokens()}, status.HTTP_201_CREATED)
+
         except IntegrityError:
             return response.Response({"message": "already_exists"}, status.HTTP_406_NOT_ACCEPTABLE)
 
