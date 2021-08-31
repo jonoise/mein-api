@@ -1,3 +1,15 @@
-from django.shortcuts import render
+from rest_framework import generics
+from .models import Restaurant
+from .serializers import RestaurantSerializer
 
-# Create your views here.
+
+class ListCreateRestaurants(generics.ListCreateAPIView):
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantSerializer
+
+
+class RetrieveUpdateDestroyRestaurants(generics.RetrieveUpdateDestroyAPIView):
+    """NOTA PARA EL ENDPOINT: El parámetro uuid es el uuid del restaurant"""
+    lookup_field = "uuid"
+    queryset = Restaurant.objects.all()
+    serializer_class = RestaurantSerializer
