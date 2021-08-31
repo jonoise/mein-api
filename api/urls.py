@@ -11,5 +11,6 @@ urlpatterns = [
     path('users/email-validation/',
          include('apps.email_validation.urls'), name="email_validation"),
     path('restaurants/', include("apps.restaurants.urls"), name='restaurants'),
+    path('menus/', include("apps.menus.urls"), name='menus'),
 
 ]
