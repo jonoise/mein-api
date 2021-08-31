@@ -4,6 +4,6 @@ urlpatterns = [
     path('', MainUserView.as_view(), name="owners-create"),
     path('meseros/', WaiterView.as_view(), name="meseros-create"),
     path('login/', MainUserLogin.as_view(), name="login"),
-    path('change-pass/<str:uuid>/',
+    path('change-pass/<str:user_uuid>/',
          MainUserChangePassword.as_view(), name="change-password"),
 ]

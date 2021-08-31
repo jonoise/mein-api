@@ -75,9 +75,9 @@ class MainUserChangePassword(generics.CreateAPIView):
     serializer_class = ChangePasswordSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request, uuid):
+    def post(self, request, user_uuid):
         credentials = request.data
-        found = get_object_or_404(MainUser, uuid=uuid)
+        found = get_object_or_404(MainUser, uuid=user_uuid)
         user = authenticate(
             email=found.email, password=credentials['old_password'])
         if user:
