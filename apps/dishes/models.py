@@ -24,6 +24,6 @@ class Dish(models.Model):
 
 # class CheckedDish(models.Model):
 #     dish = models.ForeignKey(Dish, on_delete=models.DO_NOTHING)
-
+#     quantity
 #     class Meta:
 #         verbose_name_plural = "Dishes"

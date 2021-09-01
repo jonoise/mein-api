@@ -15,4 +15,7 @@ urlpatterns = [
     path('dishes/', include("apps.dishes.urls"), name='dishes'),
     path('tables/', include("apps.tables.urls"), name='tables'),
 
+    # SOCKET IO EXPERIENCE DATA
+    path('checks/', include("apps.checks.urls"), name='checks'),
+
 ]
