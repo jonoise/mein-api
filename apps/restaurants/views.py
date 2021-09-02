@@ -10,6 +10,6 @@ class ListCreateRestaurants(generics.ListCreateAPIView):
 
 class RetrieveUpdateDestroyRestaurants(generics.RetrieveUpdateDestroyAPIView):
     """NOTA PARA EL ENDPOINT: El parámetro uuid es el uuid del restaurant"""
-    lookup_field = "uuid"
+    lookup_field = "slug"
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer

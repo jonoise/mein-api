@@ -3,6 +3,6 @@ from .views import ListCreateRestaurants, RetrieveUpdateDestroyRestaurants
 
 urlpatterns = [
     path('', ListCreateRestaurants.as_view(), name="list-create-restaurant"),
-    path('<str:uuid>',
+    path('<str:slug>',
          RetrieveUpdateDestroyRestaurants.as_view(), name="rud-restaurant")
 ]
