@@ -17,5 +17,7 @@ urlpatterns = [
 
     # SOCKET IO EXPERIENCE DATA
     path('checks/', include("apps.checks.urls"), name='checks'),
+    path('table-instances/', include("apps.table_instances.urls"),
+         name='table_instances'),
 
 ]
