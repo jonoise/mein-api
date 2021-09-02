@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'apps.dishes.apps.DishesConfig',
     'apps.tables.apps.TablesConfig',
     'apps.checks.apps.ChecksConfig',
+    'apps.table_instances.apps.TableInstancesConfig',
     # DJANGO
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,9 +44,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_yasg',
+    "corsheaders",
+
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
