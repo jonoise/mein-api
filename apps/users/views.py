@@ -35,10 +35,13 @@ class MainUserView(generics.CreateAPIView):
 
             serializer = AccountSerializer(owner_account)
 
-            return response.Response({"user": serializer.data, 'tokens': new_owner.tokens()}, status.HTTP_201_CREATED)
+            return response.Response({"message": "created", "account": serializer.data, 'tokens': new_owner.tokens()}, status.HTTP_201_CREATED)
 
         except IntegrityError:
-            return response.Response({"message": "already_exists"}, status.HTTP_406_NOT_ACCEPTABLE)
+            return response.Response({"message": "already_exists"}, status.HTTP_208_ALREADY_REPORTED)
+
+        except KeyError as err:
+            return response.Response({"message": f"missing_field: {err.__str__()}"}, status.HTTP_406_NOT_ACCEPTABLE)
 
 
 class MainUserLogin(generics.CreateAPIView):
