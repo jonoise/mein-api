@@ -6,6 +6,7 @@ from .serializers import TableSerializer
 class ListCreateTables(generics.ListCreateAPIView):
     queryset = Table.objects.all()
     serializer_class = TableSerializer
+    filterset_fields = ('restaurant',)
 
 
 class RetrieveUpdateDestroyTables(generics.RetrieveUpdateDestroyAPIView):
