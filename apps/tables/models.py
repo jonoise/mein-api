@@ -11,4 +11,4 @@ class Table(models.Model):
     show_seats = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return f'Mesa del {self.restaurant}'
+        return f'Mesa {self.id} del {self.restaurant}'
