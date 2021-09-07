@@ -28,7 +28,7 @@ class TableInstaceAvailability(generics.CreateAPIView):
             if last_instance.is_valid:
                 return response.Response({
                     "uuid": last_instance.uuid,
-                    "restaurant": table.restaurant.slug,
+                    "restaurant": {"id": table.restaurant.id, "slug": table.restaurant.slug},
                     "tableNumber": table.number,
                     "fresh": False
                 })
@@ -41,7 +41,7 @@ class TableInstaceAvailability(generics.CreateAPIView):
 
         return response.Response({
             "uuid": new_instance.uuid,
-            "restaurant": table.restaurant.slug,
+            "restaurant": {"id": table.restaurant.id, "slug": table.restaurant.slug},
             "tableNumber": table.number,
             "fresh": True
         })
@@ -54,7 +54,7 @@ class RejectTableInstace(generics.CreateAPIView):
 
     def post(self, request):
         tableInstance = TableInstance.objects.get(
-            uuid=request.data['tableInstance'])
+            uuid=request.data['instance_uuid'])
         if tableInstance:
             if tableInstance.is_valid:
                 return response.Response({"reject": False})
