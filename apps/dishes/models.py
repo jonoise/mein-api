@@ -12,6 +12,7 @@ class Dish(models.Model):
     description = models.CharField(max_length=255, blank=True, null=True)
     price = models.PositiveIntegerField()
     image = models.ImageField(blank=True, null=True)
+    featured = models.BooleanField(default=False)
     is_veggie = models.BooleanField()
     is_gluten_free = models.BooleanField()
 
@@ -27,3 +28,15 @@ class Dish(models.Model):
 #     quantity
 #     class Meta:
 #         verbose_name_plural = "Dishes"
+
+
+class Discount(models.Model):
+    dish = models.ForeignKey(
+        Dish, on_delete=models.CASCADE, related_name="discount")
+    new_price = models.PositiveIntegerField()
+    expires = models.DateField()
+
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return super().__str__()
