@@ -19,6 +19,7 @@ class Restaurant(models.Model):
     uuid = models.CharField(max_length=255)
     slug = models.SlugField(unique=True, max_length=100, null=True, blank=True)
     name = models.CharField(max_length=100)
+    welcome_message = models.CharField(max_length=105, blank=True, null=True)
     type_of = models.CharField(max_length=20, null=True, blank=True)
     logo = models.ImageField(null=True, blank=True,
                              upload_to=restaurante_logo_path)
