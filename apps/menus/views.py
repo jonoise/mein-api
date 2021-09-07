@@ -11,6 +11,7 @@ class ListCreateMenus(generics.ListCreateAPIView):
 class ListCreateCategories(generics.ListCreateAPIView):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
+    filterset_fields = ["menu"]
 
 
 class RetrieveUpdateDestroyMenus(generics.RetrieveUpdateDestroyAPIView):
