@@ -9,9 +9,14 @@ class Menu(models.Model):
 
     uuid = models.CharField(max_length=255)
     has_veggie = models.BooleanField(default=False)
+    has_gluten_freen = models.BooleanField(default=False)
 
     def __str__(self) -> str:
         return f'Menu de {self.restaurant}'
+
+    def _categories(self):
+        return self.categories.all()
+        pass
 
 
 def category_image_path(instance, filename):
@@ -37,3 +42,6 @@ class Category(models.Model):
 
     def __str__(self) -> str:
         return f'Categoria del {self.menu}'
+
+    def _dishes(self):
+        return self.dishes.all()
