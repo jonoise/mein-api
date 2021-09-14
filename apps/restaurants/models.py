@@ -24,7 +24,6 @@ class Restaurant(models.Model):
     logo = models.ImageField(null=True, blank=True,
                              upload_to=restaurante_logo_path)
     main_menu = models.CharField(max_length=255, blank=True, null=True)
-    max_tables = models.PositiveIntegerField(default=3)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -42,3 +41,6 @@ class Restaurant(models.Model):
             self.slug = newSlug + f'-{random.randint(1, 100)}'
         except:
             self.slug = newSlug
+
+    def _plan(self):
+        return self.plans.all().first()
