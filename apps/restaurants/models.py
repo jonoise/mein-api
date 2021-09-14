@@ -17,14 +17,18 @@ class Restaurant(models.Model):
     owner = models.ForeignKey(
         Account, on_delete=models.CASCADE, related_name="restaurants")
     uuid = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, max_length=100, null=True, blank=True)
+    slug = models.SlugField(max_length=100, null=True, blank=True)
     name = models.CharField(max_length=100)
-    welcome_message = models.CharField(max_length=105, blank=True, null=True)
+    welcome_message = models.CharField(max_length=145, blank=True, null=True)
     type_of = models.CharField(max_length=20, null=True, blank=True)
     logo = models.ImageField(null=True, blank=True,
                              upload_to=restaurante_logo_path)
     main_menu = models.CharField(max_length=255, blank=True, null=True)
     max_tables = models.PositiveIntegerField(default=3)
+    created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-created"]
 
     def __str__(self) -> str:
         return f'Restaurante {self.name}'
