@@ -1,6 +1,6 @@
-from rest_framework import generics
+from rest_framework import generics, permissions
 from .models import Dish
-from .serializers import DishSerializer
+from .serializers import DishSerializer, DishSpecificsSerializer
 # Create your views here.
 
 
@@ -14,3 +14,10 @@ class RetrieveUpdateDestroyDishes(generics.RetrieveUpdateDestroyAPIView):
     lookup_field = "uuid"
     queryset = Dish.objects.all()
     serializer_class = DishSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class ListCreateSpecific(generics.ListCreateAPIView):
+    queryset = Dish.objects.all()
+    serializer_class = DishSpecificsSerializer
+    permission_classes = [permissions.AllowAny]
