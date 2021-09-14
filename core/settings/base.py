@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'apps.tables.apps.TablesConfig',
     'apps.checks.apps.ChecksConfig',
     'apps.table_instances.apps.TableInstancesConfig',
+    'apps.plans.apps.PlansConfig',
     # DJANGO
     'django.contrib.admin',
     'django.contrib.auth',
