@@ -13,6 +13,8 @@ class Dish(models.Model):
     price = models.PositiveIntegerField()
     image = models.ImageField(blank=True, null=True)
     featured = models.BooleanField(default=False)
+    duration = models.PositiveIntegerField(null=True, blank=True)
+    calories = models.PositiveIntegerField(null=True, blank=True)
     is_veggie = models.BooleanField()
     is_gluten_free = models.BooleanField()
 
@@ -23,15 +25,8 @@ class Dish(models.Model):
         return f'{self.name} del {self.menu}'
 
 
-# class CheckedDish(models.Model):
-#     dish = models.ForeignKey(Dish, on_delete=models.DO_NOTHING)
-#     quantity
-#     class Meta:
-#         verbose_name_plural = "Dishes"
-
-
 class Discount(models.Model):
-    dish = models.ForeignKey(
+    dish = models.OneToOneField(
         Dish, on_delete=models.CASCADE, related_name="discount")
     new_price = models.PositiveIntegerField()
     expires = models.DateField()
@@ -40,3 +35,26 @@ class Discount(models.Model):
 
     def __str__(self) -> str:
         return super().__str__()
+
+
+class Specific(models.Model):
+    dish = models.ForeignKey(
+        Dish, on_delete=models.CASCADE, related_name="specifics")
+    name = models.CharField(max_length=200)
+    type_of = models.CharField(max_length=20)
+    limit = models.PositiveIntegerField(blank=True, null=True)
+
+    def __str__(self) -> str:
+        return f'Specific for {self.dish}'
+
+    def _options(self):
+        return self.options.all()
+
+
+class OptionField(models.Model):
+    specific = models.ForeignKey(
+        Specific, on_delete=models.CASCADE, related_name="options")
+    name = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return f'OptionField for {self.specific}'
