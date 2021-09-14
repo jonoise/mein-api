@@ -28,7 +28,7 @@ class MainUserView(generics.CreateAPIView):
                 user=new_owner,
                 uuid=new_owner.uuid,
                 email=credentials['email'],
-                name=credentials['email'].split()[0],
+                name=credentials['email'].split("@")[0],
                 is_owner=True
             )
             owner_account.save()
@@ -58,7 +58,7 @@ class MainUserLogin(generics.CreateAPIView):
             email=credentials['email'], password=credentials['password'])
         if user:
             serializer = AccountSerializer(user.account)
-            return response.Response({'user': serializer.data, 'tokens': user.tokens()})
+            return response.Response({'account': serializer.data, 'tokens': user.tokens()})
 
         return response.Response({'message': 'invalid_credentials'}, status.HTTP_401_UNAUTHORIZED)
 
