@@ -41,7 +41,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self) -> str:
-        return f'Categoria del {self.menu}'
+        return f'Categoria {self.name} del {self.menu}'
 
     def _dishes(self):
         return self.dishes.all()
