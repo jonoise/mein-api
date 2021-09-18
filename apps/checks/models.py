@@ -14,3 +14,6 @@ class Check(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     total_amount = models.PositiveIntegerField()
     closed = models.BooleanField(default=False)
+
+    def __str__(self) -> str:
+        return f'Check de la {self.table} por {self.total_amount}'
