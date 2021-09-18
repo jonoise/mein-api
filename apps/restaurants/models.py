@@ -1,7 +1,9 @@
 import os
 import random
+import datetime as dt
 from django.db import models
 from apps.users.models import Account
+from django.db.models import Sum
 # Create your models here.
 
 
@@ -44,3 +46,23 @@ class Restaurant(models.Model):
 
     def _plan(self):
         return self.plans.all().first()
+
+    def get_dishes(self):
+        if self.main_menu:
+            menu = self.menus.all().get(uuid=self.main_menu)
+            dishes = menu.dishes.all()
+            return dishes
+        return []
+
+    def _counting(self):
+        today = dt.date.today()
+        a_month_ago = dt.timedelta(30)
+        last_week = dt.timedelta(7)
+        return {
+            "menus": self.menus.count(),
+            "tables": self.tables.count(),
+            "dishes": len(self.get_dishes()),
+            "orders": self.checks.count(),
+            "total_last_month": self.checks.filter(created__gt=(today - a_month_ago)).aggregate(Sum("total_amount"))["total_amount__sum"],
+            "total_last_week": self.checks.filter(created__gt=(today - last_week)).aggregate(Sum("total_amount"))["total_amount__sum"],
+        }
