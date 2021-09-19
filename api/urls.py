@@ -14,6 +14,7 @@ urlpatterns = [
     path('menus/', include("apps.menus.urls"), name='menus'),
     path('dishes/', include("apps.dishes.urls"), name='dishes'),
     path('tables/', include("apps.tables.urls"), name='tables'),
+    path('kitchens/', include("apps.kitchens.urls"), name='kitchens'),
 
     # SOCKET IO EXPERIENCE DATA
     path('checks/', include("apps.checks.urls"), name='checks'),
