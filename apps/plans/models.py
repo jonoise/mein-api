@@ -13,7 +13,7 @@ class Plan(models.Model):
         Restaurant, on_delete=models.CASCADE, related_name="plans")
     type_of = models.CharField(max_length=20, default="free")
     pricing = models.PositiveIntegerField(default=0)
-    max_orders = models.PositiveIntegerField(default=100)
+    max_orders = models.PositiveIntegerField(default=50)
     max_tables = models.PositiveIntegerField(default=3)
     paid_until = models.DateField(null=True, blank=True)
 
