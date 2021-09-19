@@ -26,6 +26,7 @@ class Restaurant(models.Model):
     logo = models.ImageField(null=True, blank=True,
                              upload_to=restaurante_logo_path)
     main_menu = models.CharField(max_length=255, blank=True, null=True)
+    kitchen = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
