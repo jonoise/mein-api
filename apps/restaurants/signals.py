@@ -19,6 +19,8 @@ def createRestaurantPlan(sender, instance, created, **kwargs):
             owner=instance.owner,
             restaurant=instance,
         )
-        Kitchen.objects.create(
+        kitchen = Kitchen.objects.create(
             restaurant=instance,
         )
+        instance.kitchen = kitchen.uuid
+        instance.save()
