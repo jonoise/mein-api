@@ -17,3 +17,15 @@ class Check(models.Model):
 
     def __str__(self) -> str:
         return f'Check de la {self.table} por {self.total_amount}'
+
+
+class CheckedDish(models.Model):
+    bill = models.ForeignKey(
+        Check, on_delete=models.CASCADE, related_name="dishes")
+    uuid = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    price = models.PositiveIntegerField()
+    specifics = models.TextField()
+
+    def __str__(self) -> str:
+        return f'Dish from {self.check}'
